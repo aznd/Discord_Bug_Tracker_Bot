@@ -2,8 +2,6 @@ import discord
 import logging
 from discord.ext import commands
 
-logging.basicConfig(level=logging.DEBUG)
-
 
 class BugTracker(commands.Cog):
     def __init__(self, client):
@@ -11,7 +9,9 @@ class BugTracker(commands.Cog):
 
     @commands.command()
     @commands.has_role("Dev")
-    async def add_bug(self, ctx: discord.ext.commands.Context, title=None, description=None):
+    async def add_bug(
+        self, ctx: discord.ext.commands.Context, title=None, description=None
+    ):
         channel = self.client.get_channel(974701727783735367)
         if title is None or description is None:
             await ctx.send(

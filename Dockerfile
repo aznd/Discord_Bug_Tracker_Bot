@@ -1,6 +1,10 @@
-FROM debian:10.9
+FROM python:3-bullseye
 
-LABEL version="1.0"
-LABEL description="Docker image for the discord bug tracker"
+WORKDIR /usr/app/src
 
-CMD ["python", "main.py"]
+COPY . ./
+
+RUN pip install -r ./requirements.txt
+RUN git clone https://github.com/Rapptz/discord.py
+RUN python3 -m pip install -U /usr/app/src/discord.py/.
+CMD ["python", "./main.py"]
