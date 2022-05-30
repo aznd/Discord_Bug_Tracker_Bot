@@ -1,1 +1,1 @@
-bugs_channel_id = 974701727783735367
+bugs_channel_id = 980939006269349939
