@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARNING)
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -15,18 +15,21 @@ intents.message_content = True
 client = commands.Bot(command_prefix="!", intents=intents)
 
 
+@commands.has_role("Dev")
 @client.command()
 async def load(ctx, extension):
     await client.load_extension(f"cogs.{extension}")
     await ctx.send("Loaded cog.")
 
 
+@commands.has_role("Dev")
 @client.command()
 async def unload(ctx, extension):
     await client.unload_extension(f"cogs.{extension}")
     await ctx.send("Unloaded cog.")
 
 
+@commands.has_role("Dev")
 @client.command()
 async def reload(ctx, extension):
     try:
@@ -42,7 +45,7 @@ async def on_ready():
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             await client.load_extension(f"cogs.{filename[:-3]}")
-    logging.info("Bot online.")
+    logging.warning("Bot online.")
 
 
 client.run(TOKEN)
