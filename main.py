@@ -41,6 +41,14 @@ async def reload(ctx, extension):
 
 
 @client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Command not found.")
+    elif isinstance(error, commands.MissingRole):
+        await ctx.send("You do not have the required role to use this command.")
+
+
+@client.event
 async def on_ready():
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):

@@ -1,10 +1,8 @@
 import discord
-import logging
 from discord.ext import commands
 import bot_config
 
 bug_channel_id = bot_config.bugs_channel_id
-emoji_id = bot_config.emoji_id
 
 
 class BugTracker(commands.Cog):
@@ -14,7 +12,7 @@ class BugTracker(commands.Cog):
     @commands.command()
     @commands.has_role("Dev")
     async def create(
-            self, ctx: discord.ext.commands.Context, title=None
+            self, ctx: discord.ext.commands.Context, title=None,
     ):
         if not ctx.message.reference:
             await ctx.send("You can only use this command in a reply.")
