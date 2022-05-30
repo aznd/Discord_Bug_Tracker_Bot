@@ -20,7 +20,7 @@ class BugTracker(commands.Cog):
             await ctx.send("You can only use this command in a reply.")
             return
         else:
-            channel = self.client.get_channel(974701727783735367)
+            channel = self.client.get_channel(bug_channel_id)
             if title is None:
                 await ctx.send(
                     '''You need to provide a title and a description of the bug!\n
@@ -38,7 +38,7 @@ class BugTracker(commands.Cog):
         thread = ctx.channel
 
         if type(thread) == discord.Thread:
-            channel = self.client.get_channel(974701727783735367)
+            channel = self.client.get_channel(bug_channel_id)
             async for message in channel.history():
                 if str(thread.id) in message.embeds[0].description:
                     old_title = message.embeds[0].title
@@ -60,7 +60,7 @@ class BugTracker(commands.Cog):
     async def reopen(self, ctx):
         thread = ctx.channel
         if type(thread) == discord.Thread:
-            channel = self.client.get_channel(974701727783735367)
+            channel = self.client.get_channel(bug_channel_id)
             async for message in channel.history():
                 if str(thread.id) in message.embeds[0].description:
                     title = str(message.embeds[0].title).replace(" - CLOSED", "")
